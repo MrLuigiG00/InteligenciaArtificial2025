@@ -1,0 +1,8 @@
+opencv-python
+anaConda
+Sift
+scikit-learn
+Numpy
+Pandas
+Tensorflow
+Hvac
