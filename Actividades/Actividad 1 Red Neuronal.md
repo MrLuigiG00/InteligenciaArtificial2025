@@ -15,3 +15,5 @@
     - Respuestas de 0/1 o verdadero y falso sobre la coordenada donde se coloca la ficha
 - ¿Cuales son los valores maximos que puede tener el bias?
     - Supongo que un 0.80 para que no pueda jugar de manera perfecta
+
+    

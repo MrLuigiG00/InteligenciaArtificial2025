@@ -1,8 +1,11 @@
 # Proyecto 1: Algoritmo A* / A Estrella
 Este proyecto codifica en pygame el algoritmo A* para encontrar la ruta mas corta por busqueda informada.
 
+>[!NOTE]
+> Lo que se arreglo fue la equivalencia de H
+
 ## Codigo
-```
+```python
 import pygame
 from queue import PriorityQueue
 
@@ -29,7 +32,7 @@ COSTO_HORIZONTAL_VERTICAL = 10
 COSTO_DIAGONAL = 14
 
 # Numero de cuadricula cuadrada
-FILAS = 10
+FILAS = 11
 
 class Nodo:
     def _init_(self, fila, col, ancho, total_filas):
@@ -43,7 +46,7 @@ class Nodo:
 
         #Costos por casilla
         self.g = float("inf")  
-        self.h = 0 
+        self.h = 0
         self.f = float("inf")
         self.padre = None  
 
@@ -94,6 +97,20 @@ class Nodo:
         texto = FUENTE.render(f"{self.get_pos()}", True, (0, 0, 0))
         ventana.blit(texto, (self.x + 35, self.y+5))
 
+        if self.g != float("inf"):
+            f_var = int(self.f) if self.f != float('inf') else " "
+            g_var = int(self.g) if self.g != float('inf') else " "
+            h_var = int(self.h) if self.h != float('inf') else " "
+
+            texto_f = FUENTE.render(f"F: {f_var}", True, (0,0,0))
+            ventana.blit(texto_f, (self.x + 5, self.y+ 15))
+
+            texto_g = FUENTE.render(f"G: {g_var}", True, (0,0,0))
+            ventana.blit(texto_g, (self.x + 5, self.y+ 25))
+
+            texto_h = FUENTE.render(f"H: {h_var}", True, (0,0,0))
+            ventana.blit(texto_h, (self.x + 5, self.y+ 35))
+
 
 def crear_grid(filas, ancho):
     grid = []
@@ -136,26 +153,38 @@ def calcular_h(nodo, fin):
     return (abs(x2 - x1) + abs(y2 - y1))*COSTO_HORIZONTAL_VERTICAL
 
 
+
 # Verifica alrededor del nodo actual los vecinos y si alguno es pared
 def obtener_vecinos(nodo, grid):
     vecinos = []
-    print("Coordenadas del nodo: ", nodo.get_pos(), " Casilla: ",nodo.obtener_Casilla())
+
+    print("Nodo fila y columna: ", nodo.fila, nodo.col)
+    print("Total de filas: ", nodo.total_filas)
+
     if nodo.fila < nodo.total_filas - 1 and not grid[nodo.fila + 1][nodo.col].es_pared():  # Abajo
         vecinos.append(grid[nodo.fila + 1][nodo.col])
+
     if nodo.fila > 0 and not grid[nodo.fila - 1][nodo.col].es_pared():  # Arriba
         vecinos.append(grid[nodo.fila - 1][nodo.col])
+
     if nodo.col < nodo.total_filas - 1 and not grid[nodo.fila][nodo.col + 1].es_pared():  # Derecha
         vecinos.append(grid[nodo.fila][nodo.col + 1])
+
     if nodo.col > 0 and not grid[nodo.fila][nodo.col - 1].es_pared():  # Izquierda
         vecinos.append(grid[nodo.fila][nodo.col - 1])
-    if nodo.fila < nodo.total_filas - 1 and nodo.col < nodo.total_filas - 1 and not grid[nodo.fila + 1][nodo.col + 1].es_pared():  # ⤵
+
+    if nodo.fila < nodo.total_filas - 1 and nodo.col < nodo.total_filas - 1 and not grid[nodo.fila + 1][nodo.col + 1].es_pared():  # ↘
         vecinos.append(grid[nodo.fila + 1][nodo.col + 1])
+
     if nodo.fila < nodo.total_filas - 1 and nodo.col > 0 and not grid[nodo.fila + 1][nodo.col - 1].es_pared():  # ↙
         vecinos.append(grid[nodo.fila + 1][nodo.col - 1])
+
     if nodo.fila > 0 and nodo.col < nodo.total_filas - 1 and not grid[nodo.fila - 1][nodo.col + 1].es_pared():  # ↗
         vecinos.append(grid[nodo.fila - 1][nodo.col + 1])
+
     if nodo.fila > 0 and nodo.col > 0 and not grid[nodo.fila - 1][nodo.col - 1].es_pared():  # ↖
         vecinos.append(grid[nodo.fila - 1][nodo.col - 1])
+
     return vecinos
 
 def reconstruir_camino(nodo_actual):
@@ -181,6 +210,7 @@ def A_estrella(inicio, fin, grid):
     i = 0
     #Agregamos el nodo inicial a la lista abierta
     open_set.put((0, i, inicio))
+    #open_set_hash = {inicio}
     closed_set = set()
 
     # Inicializamos g y f del inicio
@@ -189,7 +219,9 @@ def A_estrella(inicio, fin, grid):
     
 
     while not open_set.empty():
+        inicio.es_inicio()
         current = open_set.get()[2]
+        #open_set_hash.remove(current)
         closed_set.add(current)
 
         print("Lista de abiertos: ", [n[2].get_pos() for n in open_set.queue])
@@ -203,10 +235,12 @@ def A_estrella(inicio, fin, grid):
         for vecino in obtener_vecinos(current, grid):
             if vecino in closed_set:
                 continue
-
+            
+            
+            
             peso = (
                         COSTO_DIAGONAL
-                        if calcular_h(vecino, current) == 2
+                        if calcular_h(vecino, current) == 20
                         else COSTO_HORIZONTAL_VERTICAL
                     )
             
@@ -219,11 +253,16 @@ def A_estrella(inicio, fin, grid):
                 vecino.g = temp_g
                 vecino.h = calcular_h(vecino, fin)
                 vecino.f = vecino.g + vecino.h
+                
 
                 if vecino not in open_set.queue:
                     i += 1
                     open_set.put((vecino.f, i, vecino))
+                    #open_set_hash.add(vecino)
                     if(vecino != fin):
+                        
+                        texto = FUENTE.render(f"f: {vecino.f} g: {vecino.g} h: {vecino.h}", True, (0, 0, 0))
+                        VENTANA.blit(texto, (vecino.x, vecino.y))
                         vecino.hacer_camino()
         
         if current != inicio:

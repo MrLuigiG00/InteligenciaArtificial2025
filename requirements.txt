@@ -1,5 +1,6 @@
 pygame
 opencv-python
+opencv-contrib-python
 anaConda
 Sift
 scikit-learn
