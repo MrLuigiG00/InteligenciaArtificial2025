@@ -9,3 +9,4 @@ Pandas
 tensorflow
 Hvac
 graphviz
+mediapipe
