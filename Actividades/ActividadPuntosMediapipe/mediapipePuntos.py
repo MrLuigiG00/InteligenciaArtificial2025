@@ -15,7 +15,9 @@ selected_points = [33, 133,  # ojo izquierdo
                    362, 263, # ojo derecho
                    4,        # punto de la nariz
                    61, 291,  # boca
-                  101, 330  # mejillas
+                  101, 330,  # mejillas
+                  10,
+                  159, 145
                   ]  
 
 
