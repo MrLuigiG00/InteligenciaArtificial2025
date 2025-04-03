@@ -8,9 +8,14 @@ Los paramentros que implementaria para saber esto es reconocer  los siguientes p
 - Movimiento facial
 
 
-Puntos importantes:
-- 10 frente
-- 470 arriba del parpado izquierdo
-- 472 bajo del parpado izquierdo
-- 475 arriba del parpado derecho
-- 477 bajo del parpado derecho
+### Emociones
+
+El principio que se siguio para poder identificar las emociones en una persona, lo primero es detectar que moviemientos son los factores comunes como por ejemplo
+
+- <b>Feliz:</b>  Los factores que se pueden identificar son sonrisas, levantar las cejas, entre abrir la boca. Esos son entradas que son rasgos importantes de la sonrisa.
+
+- <b>Enojado:</b> En el ejemplo de enojado, se hay un rasgo facil de identificar y es que se frunce el seño y puede que la boca este entre abierto o como si estuviera triste, los ojos se pueden entre cerrados. 
+
+- <b>Triste:</b> La forma de intentificar si es triste la boca puede hacerse hacia abajo, los ojos pueden estar entre cerrados.
+
+- <b>Asombrado:</b> Facil de identificar, los ojos pueden estar mas abiertos de lo normal pero la expresion mas comun es abrir la boca.
