@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeClassifier, export_graphviz
 import graphviz
 
 # Cargar el dataset
-file_path = r'Actividades\Arbol de decision\phaser.csv'
+file_path = r'Actividades\Arbol de decision\phaser3.csv'
 
 dataset = pd.read_csv(file_path)
 
