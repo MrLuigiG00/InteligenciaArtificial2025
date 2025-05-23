@@ -9,7 +9,10 @@ Tareas de la asignatura de la Inteligencia Artificial.
 ---
 ## Indice
 - ## Proyectos
-  - [A Asterisco](https://github.com/MrLuigiG00/InteligenciaArtificial2025/tree/main/Proyectos/A-asterisco "Proyecto 1 A*")  
+  - [A Asterisco](https://github.com/MrLuigiG00/InteligenciaArtificial2025/tree/main/Proyectos/A-asterisco "Proyecto 1 A*")
+  - [Phaser con 3 modelos](https://github.com/MrLuigiG00/InteligenciaArtificial2025/tree/main/Proyectos/pygamesc)
+  - [LLM](https://github.com/MrLuigiG00/InteligenciaArtificial2025/tree/main/Proyectos/LLM)
+    
 - ## Actividades
   - [Modelo de 5 en raya](https://github.com/MrLuigiG00/InteligenciaArtificial2025/blob/main/Actividades/Actividad%201%20Red%20Neuronal.md "Actividad 1 de Modelado")
   - [Emociones de Mediapipe](https://github.com/MrLuigiG00/InteligenciaArtificial2025/tree/main/Actividades/ActividadPuntosMediapipe)
